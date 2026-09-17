@@ -1,76 +1,62 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { MetricsBar } from './components/MetricsBar';
-import { ServicesBento } from './components/ServicesBento';
-import { WorkflowPipeline } from './components/WorkflowPipeline';
-import { RoiCalculator } from './components/RoiCalculator';
-import { CaseStudies } from './components/CaseStudies';
-import { AuditBookingSection } from './components/AuditBookingSection';
+import { FeaturesSection } from './components/FeaturesSection';
+import { HandsOffSection } from './components/HandsOffSection';
+import { PartnersSection } from './components/PartnersSection';
+import { AISystemsSection } from './components/AISystemsSection';
+import { PricingSection } from './components/PricingSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
+import { TeamSection } from './components/TeamSection';
+import { BlogSection } from './components/BlogSection';
+import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
-import { AuditModal } from './components/AuditModal';
 
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenBooking = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseBooking = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleScrollToSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      const yOffset = -80;
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0B0D13] text-[#F8FAFC] selection:bg-[#00D2E0]/20 selection:text-white font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#1a1a1a] font-sans antialiased overflow-x-hidden">
       {/* Global Navigation */}
-      <Navbar onOpenBooking={handleOpenBooking} />
+      <Navbar />
 
       {/* Main Page Sections */}
       <main id="main-content">
-        {/* 1. Hero Section */}
-        <HeroSection 
-          onOpenBooking={handleOpenBooking} 
-          onExploreArchitecture={() => handleScrollToSection('workflow-section')} 
-        />
+        {/* 1. Hero */}
+        <HeroSection />
 
-        {/* 2. Core Value Metrics (Social Proof Bar) */}
-        <MetricsBar />
+        {/* 2. Main Features - "The AI Automation Agency" */}
+        <FeaturesSection />
 
-        {/* 3. Solutions & Offerings Grid (Bento Box) */}
-        <ServicesBento onOpenBooking={handleOpenBooking} />
+        {/* 3. Hands-off AI Systems + Don't fall into the AI trap */}
+        <HandsOffSection />
 
-        {/* 4. Visual System Workflow (Interactive Timeline) */}
-        <WorkflowPipeline />
+        {/* 4. Partner Logos */}
+        <PartnersSection />
 
-        {/* 5. ROI & Pipeline Estimator */}
-        <RoiCalculator onOpenBooking={handleOpenBooking} />
+        {/* 5. Top AI Systems + 100+ Uses */}
+        <AISystemsSection />
 
-        {/* 6. Enterprise Case Studies & Proof */}
-        <CaseStudies onOpenBooking={handleOpenBooking} />
+        {/* 6. Pricing */}
+        <PricingSection />
 
-        {/* 7. High-Converting Audit Booking (CTA Section) */}
-        <AuditBookingSection />
+        {/* 7. Client Testimonials */}
+        <TestimonialsSection />
 
-        {/* 8. FAQ Accordion */}
+        {/* 8. FAQ */}
         <FaqSection />
+
+        {/* 9. Team */}
+        <TeamSection />
+
+        {/* 10. Blog / Insights */}
+        <BlogSection />
+
+        {/* 11. CTA - "The Future Belongs to Those Who Automate Today" */}
+        <CTASection />
       </main>
 
       {/* Global Footer */}
-      <Footer onOpenBooking={handleOpenBooking} />
-
-      {/* Global Booking Modal */}
-      <AuditModal isOpen={isModalOpen} onClose={handleCloseBooking} />
+      <Footer />
     </div>
   );
 }

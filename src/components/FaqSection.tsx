@@ -1,66 +1,73 @@
 import React, { useState } from 'react';
+import { Plus, Minus, ArrowRight } from 'lucide-react';
 import { FAQ_ITEMS } from '../data/content';
-import { ChevronDown } from 'lucide-react';
 
-export const FaqSection: React.FC = () => {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+export function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleFaq = (idx: number) => {
-    setOpenIdx(openIdx === idx ? null : idx);
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
-    <section id="faq-section" className="relative py-20 md:py-24 bg-[#0B0D13] border-t border-white/[0.08]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121620] border border-white/10 text-xs font-mono text-[#94A3B8] mb-4">
-            <span>Technical FAQ</span>
-          </div>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white tracking-tight">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-sm sm:text-base text-[#94A3B8] mt-3 leading-relaxed">
-            Everything you need to know about our secondary domain infrastructure, deliverability protocols, and qualification engine.
-          </p>
-        </div>
+    <section id="faq" className="py-20 lg:py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left column - heading */}
+          <div className="lg:col-span-2">
+            <div className="lg:sticky lg:top-28">
+              <span className="section-badge mb-6 inline-flex">FAQS</span>
 
-        {/* Accordion List */}
-        <div className="space-y-3">
-          {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openIdx === idx;
-            return (
-              <div
-                key={idx}
-                className={`rounded-xl border transition-colors overflow-hidden ${
-                  isOpen
-                    ? 'bg-[#181E2C] border-[#00D2E0]/40'
-                    : 'bg-[#121620] border-white/[0.08] hover:border-white/20'
-                }`}
-              >
+              <h2 className="font-heading text-3xl sm:text-4xl text-[#1a1a1a] mb-4">
+                Frequently Asked Questions
+              </h2>
+
+              <p className="text-[#4a4a4a] mb-6 leading-relaxed">
+                These FAQs are based on the real, pressing questions our
+                clients asked and our answers to for complete clarity!
+              </p>
+
+              <a href="#contact" className="btn-dark text-sm">
+                Still have a question?
+                <ArrowRight size={14} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right column - accordion */}
+          <div className="lg:col-span-3 space-y-3">
+            {FAQ_ITEMS.map((item, idx) => (
+              <div key={idx} className="faq-item">
                 <button
-                  onClick={() => toggleFaq(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer"
+                  className="faq-trigger"
+                  onClick={() => toggle(idx)}
+                  aria-expanded={openIndex === idx}
                 >
-                  <span className="font-heading font-bold text-sm sm:text-base text-white">
-                    {item.question}
+                  <span className="pr-4">{item.question}</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center transition-transform">
+                    {openIndex === idx ? (
+                      <Minus size={14} className="text-[#1a1a1a]" />
+                    ) : (
+                      <Plus size={14} className="text-[#1a1a1a]" />
+                    )}
                   </span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-[#00D2E0] shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
-                  />
                 </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#94A3B8] leading-relaxed border-t border-white/[0.04] pt-3">
+                {/* Answer */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openIndex === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="faq-content">
                     {item.answer}
                   </div>
-                )}
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}

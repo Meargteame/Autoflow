@@ -1,80 +1,88 @@
-export interface ServiceOffering {
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+export interface HeroContent {
+  badge: string;
+  headingParts: string[];
+  highlightText: string;
+  subtitle: string;
+  ctaText: string;
+  guarantee: string;
+}
+
+export interface Feature {
+  title: string;
+  description: string;
+}
+
+export interface AISystem {
   id: string;
   title: string;
-  tagline: string;
-  description: string;
-  badge: string;
   iconName: string;
-  metrics: { label: string; value: string };
+}
+
+export interface UseCase {
+  label: string;
+  iconName: string;
+}
+
+export interface PricingTier {
+  id: string;
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  ctaText: string;
+  ctaStyle: 'primary' | 'dark' | 'outline';
+  subNote: string;
   features: string[];
-  samplePayload?: {
-    type: string;
-    details: Record<string, string | number | boolean>;
+  popular?: boolean;
+}
+
+export interface Testimonial {
+  id: string;
+  text: string;
+  author: string;
+  company: string;
+  rating: number;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  imageUrl: string;
+  socials: {
+    linkedin?: string;
+    facebook?: string;
+    twitter?: string;
   };
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt?: string;
+  date: string;
+  imageUrl: string;
+  author?: string;
+  authorDate?: string;
   featured?: boolean;
 }
 
-export interface WorkflowStep {
-  stepNumber: string;
+export interface FooterColumn {
   title: string;
-  subtitle: string;
-  description: string;
-  badge: string;
-  icon: string;
-  technicalDetails: string[];
-  executionTime: string;
-  livePreview: {
-    inputTitle: string;
-    inputData: Record<string, string>;
-    aiAction: string;
-    outputTitle: string;
-    outputData: Record<string, string | number>;
-  };
+  links: { label: string; href: string }[];
 }
 
-export interface CaseStudy {
-  id: string;
-  companyName: string;
-  industry: string;
-  logoText: string;
-  highlightStat: string;
-  highlightLabel: string;
-  challenge: string;
-  solution: string;
-  results: {
-    meetingsBooked: string;
-    pipelineGenerated: string;
-    replyRate: string;
-    roi: string;
-  };
-  quote: string;
-  author: string;
-  role: string;
-}
-
-export interface SimulatedLead {
-  id: string;
+export interface PartnerLogo {
   name: string;
-  title: string;
-  company: string;
-  avatar: string;
-  status: 'scraped' | 'enriching' | 'personalized' | 'engaged' | 'booked';
-  icpScore: number;
-  channel: 'Email' | 'LinkedIn' | 'Multi-Channel';
-  dealPotential: string;
-  timestamp: string;
-  intentSignals: string[];
-}
-
-export interface AuditFormData {
-  fullName: string;
-  workEmail: string;
-  companyName: string;
-  companyWebsite: string;
-  targetIcp: string;
-  monthlyOutreachVolume: string;
-  currentCrm: string;
-  selectedDate: string;
-  selectedTimeSlot: string;
-  customNotes?: string;
+  iconType: 'text' | 'image';
 }

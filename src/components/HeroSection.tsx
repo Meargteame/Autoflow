@@ -1,89 +1,92 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
-import { HeroVisualizer } from './HeroVisualizer';
+import { ArrowRight } from 'lucide-react';
+import { HERO_CONTENT } from '../data/content';
 
-interface HeroSectionProps {
-  onOpenBooking: () => void;
-  onExploreArchitecture: () => void;
-}
-
-export const HeroSection: React.FC<HeroSectionProps> = ({ 
-  onOpenBooking, 
-  onExploreArchitecture 
-}) => {
+export function HeroSection() {
   return (
-    <section 
-      id="hero-section" 
-      className="relative pt-32 pb-16 md:pt-36 md:pb-24 overflow-hidden"
+    <section
+      id="hero"
+      className="relative pt-32 lg:pt-40 pb-24 lg:pb-32 overflow-hidden bg-white border-b border-gray-100"
     >
-      {/* Background subtle grid */}
-      <div className="absolute inset-0 bg-grid-subtle opacity-60 pointer-events-none -z-10" />
+      {/* Subtle Background Pattern - Depth without stark white void */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Soft subtle warmth */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(212,245,71,0.07)_0%,_transparent_70%)]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Main Hero Header Stack */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-          {/* Top Category Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121620] border border-white/10 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00D2E0]" />
-            <span className="text-[#94A3B8] text-xs font-mono font-medium tracking-wide">
-              AUTONOMOUS B2B OUTBOUND INFRASTRUCTURE
+        {/* Minimal dot grid */}
+        <div
+          className="absolute inset-0 opacity-[0.3]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #94a3b8 0.75px, transparent 0.75px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        {/* 4. Active Status Badge */}
+        <div className="flex justify-center mb-5">
+          <div className="section-badge text-xs flex items-center gap-2 border border-gray-200/90 bg-white/90 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+            <span className="w-2 h-2 bg-[#1a8a7d] animate-pulse" />
+            <span className="font-bold tracking-wider text-[#1a1a1a]">
+              ACCEPTING CLIENTS • {HERO_CONTENT.badge}
             </span>
-          </div>
-
-          {/* Large H1 Headline - Solid High-Contrast Typography */}
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-[1.15] mb-6">
-            Predictable B2B Pipeline. <br className="hidden sm:inline" />
-            <span className="text-white">Zero Manual SDR Overhead.</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-base sm:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl mx-auto mb-8">
-            We build and operate autonomous outbound systems—enriching verified decision-makers, synthesizing real-time buying signals, and dispatching targeted multi-channel sequences that fill your sales calendar.
-          </p>
-
-          {/* Dual Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
-            <button
-              id="hero-primary-cta"
-              onClick={onOpenBooking}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-lg font-heading font-bold text-xs sm:text-sm text-[#0B0D13] bg-[#00D2E0] hover:bg-[#00D2E0]/90 transition-colors cursor-pointer flex items-center justify-center gap-2"
-            >
-              <span>Schedule Pipeline Audit</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              id="hero-secondary-cta"
-              onClick={onExploreArchitecture}
-              className="w-full sm:w-auto px-5 py-3.5 rounded-lg font-heading font-medium text-xs sm:text-sm text-white bg-[#121620] hover:bg-[#161C28] border border-white/10 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <span>View System Architecture</span>
-              <ChevronRight className="w-4 h-4 text-[#94A3B8]" />
-            </button>
-          </div>
-
-          {/* Micro Proof Points */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs font-mono text-[#94A3B8]">
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00D2E0]" />
-              <span>99.8% Inbox Deliverability</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00D2E0]" />
-              <span>Strict ICP Filtering</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00D2E0]" />
-              <span>Native 2-Way CRM Sync</span>
-            </div>
           </div>
         </div>
 
-        {/* Hero Interactive Console */}
-        <div className="max-w-5xl mx-auto">
-          <HeroVisualizer />
+        {/* Main Heading with Refined Architectural Highlight (Fix #2) */}
+        <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4.2rem] lg:text-[4.8rem] font-extrabold text-[#1a1a1a] mb-5 max-w-4xl mx-auto leading-[1.08] tracking-tight">
+          Done-for-you AI
+          <br />
+          <span className="relative inline-block my-1.5">
+            <span className="bg-[#d4f547] border border-[#b8dc29] px-4 py-1 text-[#1a1a1a] shadow-[0_2px_12px_rgba(212,245,71,0.22)]">
+              Plan. Build. Deploy.
+            </span>
+          </span>
+          <br />
+          <span className="inline-block">In just 90 Days</span>
+        </h1>
+
+        {/* 1. Subtitle with Actual Business Outcome (No Redundancy) */}
+        <p className="text-base sm:text-lg text-[#4a4a4a] font-normal max-w-xl mx-auto leading-relaxed">
+          We design, build, and integrate custom autonomous AI systems that eliminate manual bottlenecks and scale your operations with zero disruption.
+        </p>
+
+        {/* CTA Area */}
+        <div className="mt-14 lg:mt-18 flex flex-col items-center gap-4">
+          {/* Book a Call CTA */}
+          <a
+            href="#contact"
+            className="hero-cta-idle relative inline-flex items-center gap-3 px-7 py-3.5 bg-[#1a1a1a] text-white font-bold text-[0.95rem] hover:bg-[#000000] border border-[#1a1a1a] group cursor-pointer"
+          >
+            <span className="radar-beacon" />
+            <span>{HERO_CONTENT.ctaText}</span>
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-200 group-hover:translate-x-1.5"
+            />
+          </a>
+
+          <p className="text-xs text-[#6b7280] font-medium tracking-wide">
+            {HERO_CONTENT.guarantee}
+          </p>
+
+          {/* 3. Micro-Trust Sales Funnel Points */}
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-semibold text-[#4a4a4a] pt-1">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="text-[#1a8a7d] font-bold">✓</span> Free 30-Min Strategy Audit
+            </span>
+            <span className="text-gray-300 hidden sm:inline">•</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="text-[#1a8a7d] font-bold">✓</span> Custom Automation Roadmap
+            </span>
+            <span className="text-gray-300 hidden sm:inline">•</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="text-[#1a8a7d] font-bold">✓</span> Zero Obligation
+            </span>
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}
